@@ -1,0 +1,11 @@
+/* To get the second highest values */
+
+SELECT *
+FROM (
+    SELECT *,
+           DENSE_RANK() OVER(ORDER BY Price DESC) AS rnk
+    FROM products
+) t
+WHERE rnk = 2;
+
+-----------------------------------------------
