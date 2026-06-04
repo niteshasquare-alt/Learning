@@ -7,5 +7,16 @@ FROM (
     FROM products
 ) t
 WHERE rnk = 2;
-
 -----------------------------------------------
+WITH ranked_products AS (
+    SELECT *,
+           DENSE_RANK() OVER (ORDER BY Price DESC) AS rank
+    FROM Products
+)
+SELECT *
+FROM ranked_products
+WHERE rank = 2;
+----------------------------------------------
+SELECT *
+FROM Products
+QUALIFY DENSE_RANK() OVER (ORDER BY Price DESC) = 2;
